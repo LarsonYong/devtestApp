@@ -31,7 +31,7 @@ router.get('/getUserlist',function(req,resp,next){
 router.get('/',function(req,resp,next){
     User.find({},function(err,docs){
       resp.send(docs);
-      console.log("shabi!");
+      console.log("not shabi!");
       console.log("url: ", req.url);
       console.log("Original Url: ", req.originalUrl);
     })
