@@ -2,6 +2,7 @@ export const PAGES_MENU = [
   {
     path: 'pages',
     children: [
+      
       {
         path: 'dashboard',
         data: {
@@ -338,17 +339,17 @@ export const PAGES_MENU = [
         ]
       },
       {
-        path: '',
+        path: 'userAdmin',
         data: {
           menu: {
-            title: 'general.menu.external_link',
-            url: 'http://akveo.com',
-            icon: 'ion-android-exit',
+            title: 'User Admin',
+            icon: 'ion-android-person-add',
+            pathMatch: 'prefix',
+            selected: false,
             order: 800,
-            target: '_blank'
-          }
-        }
-      }
-    ]
-  }
+          },
+        },
+      },
+    ],
+  },
 ];

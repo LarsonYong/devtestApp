@@ -33,7 +33,7 @@ export class Login {
   }
 
   public onSubmit(values: Object): void {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';;
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     if (this.form.valid) {
       // your code goes here
       // console.log(values);

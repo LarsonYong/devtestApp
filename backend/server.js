@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
 
-app.use('/**',api);
+app.use('/api',api);
 
 app.listen(port,function () {
     console.log('Server Started AT ' + port);
