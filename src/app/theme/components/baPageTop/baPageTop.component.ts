@@ -41,7 +41,7 @@ export class BaPageTop {
     const checkResult = isloggedin();
     if (checkResult) {
         logout();
-        // this.router.navigate(/Login);
+        this.router.navigateByUrl('/login') ;
     }
   }
 }

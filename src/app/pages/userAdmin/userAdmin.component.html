@@ -1,0 +1,149 @@
+
+
+<!-- navbar -->
+<ul class="nav nav-pills" style="border-bottom: 3px solid #eee; margin-right:9%" role="tablist">
+    <li id="userlistbttn" class="active" >
+        <a (click)="showuserlist()">User list</a>
+    </li>
+    <li id="adduserbttn"  role="presentation" >
+        <a  (click)="showadduser()" > Add user</a>
+    </li>
+    <li id="searchbttn"  role="presentation"  >
+        <a  (click)="showsearch()" > Search</a>
+    </li>
+
+</ul>
+<div class="row">
+    <div class="col-md-12">
+        <br/>
+    </div>
+</div>
+<div class="alert alert-danger" style="margin-left: 1%; margin-right: 10%; width: 25%;" role="alert" [hidden]="!showalert">
+    <strong>Oh snap!</strong> {{message}}.
+</div>
+<div class="alert alert-success" style="margin-left: 1%; margin-right: 10%; width: 25%;" role="alert" [hidden]="!showsuccess">
+    <strong>God Job!</strong> {{message}}!
+</div>
+<!-- userlist page -->
+<div  class="row active" id="userlist" >
+    <div class="table-responsive" style="border-bottom: 1px; margin-left: 1%; margin-right: 10%">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>UserName</th>
+                <th>Skill</th>
+                <th>Project</th>
+                <th>Admin</th>
+                <th>Password</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr *ngFor="let userData of UserList  ; let i = index; trackBy: userId">
+                <td>{{i+1}}</td>
+                <td>{{userData.Username}}</td>
+                <td>{{userData.Skill}}</td>
+                <td>{{userData.Project}}</td>
+                <td>{{userData.admin}}</td>
+                <td>{{userData.Password}}</td>
+                <td>
+                    <a [routerLink]="['/userDetails/',userData.Username]" [queryParams]="{username:userData.Username}" class="btn btn-primary">Detail</a>
+                    <a [routerLink]="['/edit/',userData.Username]" class="btn btn-success">Edit</a>
+                    <a class="btn btn-danger" (click)="deleteUser(userData.Username)">Delete</a>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+
+<!-- add user page-->
+
+<div class="row hidden" id="adduser" style="margin-left: 1%; margin-right: 10%; width: 25%;" [hidden]="submitted">
+    {{diagnostic}}
+    <form role="form" (ngSubmit)="onSubmit(newUserForm)" #newUserForm="ngForm">
+        <div  class="form-group" >
+            <label for="name">Username</label>
+            <input type="text" [(ngModel)]="model.username" id="name"
+                   class="form-control" placeholder="username"  name="name"
+                   #name="ngModel" required>
+            <div [hidden]="name.valid || name.pristine" class="alert alert-danger" style="margin-left: 1%">
+                Username is required
+            </div>
+        </div>
+    </form>
+    <form  >
+        <div   class="form-group" >
+            <label for="password">Password</label>
+            <input type="text" [(ngModel)]="model.password" id="password" name="password"
+                   class="form-control" placeholder="password" #password="ngModel" required>
+            <div [hidden]="password.valid || password.pristine" class="alert alert-danger" style="margin-left: 1%">
+                Password is required
+            </div>
+        </div>
+    </form>
+    <button type="button" class=" btn btn-info"   [disabled]="!newUserForm.form.valid"
+            style="float: right; margin-bottom: 2%" (click)="adduserclicked(model.username,model.password)">Submit</button>
+</div>
+<div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+        <div class="col-xs-3">Name</div>
+        <div class="col-xs-9  pull-left">{{ model.username }}</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">Password</div>
+        <div class="col-xs-9 pull-left">{{ model.password}}</div>
+    </div>
+    <br>
+    <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+</div>
+
+<!-- Search user page-->
+<div class="row hidden " id="searchuser" style="margin-top: 1% ;margin-left: 1%; margin-right: 10%; ">
+    <form class="form-inline" style="display: inline;position: relative;">
+        <div id="search_username" class="form-group required" >
+            <label class="sr-only">Please enter in username</label>
+            <input type="text" #searchname class="form-control" placeholder="Username">
+        </div>
+        <button type="button" class=" btn btn-info" (click)="searchuserclick(searchname.value)" style="">Search</button>
+
+    </form>
+
+    <!-- Search result-->
+    <div class="row" >
+        <div class="col-md-12">
+            <br />
+        </div>
+    </div>
+    <div class="row" [hidden]="!searched">
+        <div class="table-responsive" style="border-bottom: 1px; margin-left: 1%; margin-right: 10%">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>UserName</th>
+                    <th>Skill</th>
+                    <th>Project</th>
+                    <th>Admin</th>
+                    <th>Password</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr *ngFor="let userData of UserSearchDeatails  ; let i = index; trackBy: userId">
+                    <td>{{i+1}}</td>
+                    <td>{{userData.Username}}</td>
+                    <td>{{userData.Skill}}</td>
+                    <td>{{userData.Project}}</td>
+                    <td>{{userData.admin}}</td>
+                    <td>{{userData.Password}}</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+
+</div>
