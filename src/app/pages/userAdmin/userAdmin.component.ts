@@ -18,61 +18,77 @@ export class UserAdminComponent {
     model = new User('', '', '', '', false);
     public UserDetails = [];
     public UserSearchDeatails = [];
-    public constructor(
+    showUserlist = false;
+    showAdduser = false;
+    showSearchuser = false;
+    constructor(
         private http: Http,
         private router: Router,
         private userService: UserServices,
     ) {
+        this.showUserlist = true;
+        this.showalert = false;
+        this.showsuccess = false;
         this.userService.getUserList()
         .subscribe(
-            (data) => (this.UserList = data.json())
+            (data) => (this.UserList = data.json()),
         );
         console.log("submitted: " + this.submitted)
     }
     showuserlist() {
-        document.getElementById('userlistbttn').classList.add('active');
-        document.getElementById('adduserbttn').classList.remove('active');
-        document.getElementById('searchbttn').classList.remove('active');
-        document.getElementById('userlist').classList.add('active');
-        document.getElementById('userlist').classList.remove('hidden');
-        document.getElementById('adduser').classList.remove('active');
-        document.getElementById('adduser').classList.add('hidden');
-        document.getElementById('searchuser').classList.remove('active');
-        document.getElementById('searchuser').classList.add('hidden');
+        // document.getElementById('userlistbttn').classList.add('active');
+        // document.getElementById('adduserbttn').classList.remove('active');
+        // document.getElementById('searchbttn').classList.remove('active');
+        // document.getElementById('userlist').classList.add('active');
+        // document.getElementById('userlist').classList.remove('hidden');
+        // document.getElementById('adduser').classList.remove('active');
+        // document.getElementById('adduser').classList.add('hidden');
+        // document.getElementById('searchuser').classList.remove('active');
+        // document.getElementById('searchuser').classList.add('hidden');
         this.userService.getUserList().subscribe((data) => (this.UserList = data.json()));
         this.submitted = false;
         this.showsuccess = false;
         this.showalert = false;
+        this.showUserlist = true;
+        this.showAdduser = false;
+        this.showSearchuser = false;
       }
       showadduser() {
-          document.getElementById('userlistbttn').classList.remove('active');
-          document.getElementById('adduserbttn').classList.add('active');
-          document.getElementById('searchbttn').classList.remove('active');
-          document.getElementById('adduser').classList.add('active');
-          document.getElementById('adduser').classList.remove('hidden');
-          document.getElementById('userlist').classList.remove('active');
-          document.getElementById('userlist').classList.add('hidden');
-          document.getElementById('searchuser').classList.remove('active');
-          document.getElementById('searchuser').classList.add('hidden');
+        //   document.getElementById('userlistbttn').classList.remove('active');
+        //   document.getElementById('adduserbttn').classList.add('active');
+        //   document.getElementById('searchbttn').classList.remove('active');
+        //   document.getElementById('adduser').classList.add('active');
+        //   document.getElementById('adduser').classList.remove('hidden');
+        //   document.getElementById('userlist').classList.remove('active');
+        //   document.getElementById('userlist').classList.add('hidden');
+        //   document.getElementById('searchuser').classList.remove('active');
+        //   document.getElementById('searchuser').classList.add('hidden');
           this.submitted = false;
           this.showsuccess = false;
           this.showalert = false;
+          this.showUserlist = false;
+          this.showAdduser = true;
+          this.showSearchuser = false;
       }
       showsearch() {
-          document.getElementById('userlistbttn').classList.remove('active');
-          document.getElementById('adduserbttn').classList.remove('active');
-          document.getElementById('searchbttn').classList.add('active');
-          document.getElementById('searchuser').classList.add('active');
-          document.getElementById('searchuser').classList.remove('hidden');
-          document.getElementById('userlist').classList.remove('active');
-          document.getElementById('userlist').classList.add('hidden');
-          document.getElementById('adduser').classList.remove('active');
-          document.getElementById('adduser').classList.add('hidden');
+        //   document.getElementById('userlistbttn').classList.remove('active');
+        //   document.getElementById('adduserbttn').classList.remove('active');
+        //   document.getElementById('searchbttn').classList.add('active');
+        //   document.getElementById('searchuser').classList.add('active');
+        //   document.getElementById('searchuser').classList.remove('hidden');
+        //   document.getElementById('userlist').classList.remove('active');
+        //   document.getElementById('userlist').classList.add('hidden');
+        //   document.getElementById('adduser').classList.remove('active');
+        //   document.getElementById('adduser').classList.add('hidden');
           this.searched = false;
           this.submitted = false;
           this.showsuccess = false;
           this.showalert = false;
+          this.showUserlist = false;
+          this.showAdduser = false;
+          this.showSearchuser = true;
       }
+      
       submitted = false;
       searched = false;
       showalert = false;
@@ -96,9 +112,9 @@ export class UserAdminComponent {
                            }else if (res.status < 200 || res.status >= 300) {
                                throw new Error('This request failed. '+ res.status);
                            }else {
-                               if (res.json().status === 406) {
+                               if (res.json().status == 406) {
                                    this.showalert = true;
-                                   this.message = res.json().message;
+                                   this.message = "User already exist!";
                                    console.log("1111");
                                    console.log(this.message);
                                }else {
@@ -116,7 +132,8 @@ export class UserAdminComponent {
       
           deleteUser(username) {
               const result = confirm('Delete user: '+ username +'?');
-              this.http.post('api/user/delete',{
+              if (result) {
+              this.http.post('api/user/delete', {
                   'username': username,
               }).subscribe(data => {
                   console.log(data);
@@ -129,13 +146,14 @@ export class UserAdminComponent {
               }, err => {
                   console.log(err);
               });
+            };
           }
       
           searchuserclick(username) {
       
               this.http.get('api/getUser/' + username)
                   .map(res => {
-                      if (res.json().status === 404) {
+                      if (res.json().status == 404) {
                           this.showalert = true;
                           this.searched = false;
                           this.message = "User not exist"
