@@ -9,34 +9,155 @@ var mongoose = require('mongoose');
 // Connection URL
 var db = 'mongodb://localhost:27017/userDetails';
 var User = require('../database/dataFile');
+var unit_db = 'mongodb://localhost:27017/unitDetails';
+var Unit = require('../database/unitFile');
+var Build = require('../database/buildFile');
 var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
-// var cookieParser = require('cookie-parser');
-// app.use(cookieParser());
 
 
 
 
-// Get user list
+
+// Get users list
 router.get('/getUserlist',function(req,resp,next){
     User.find({},function (err,docs) {
         resp.send(docs);
-        console.log("not shabi!");
+        console.log("Get user list");
         console.log("url: ", req.url);
         console.log("Original Url: ", req.originalUrl);
     })
 });
 
-// router.get('/',function(req,resp,next){
-//     User.find({},function(err,docs){
-//       resp.send(docs);
-//       console.log("shabi!");
-//       console.log("url: ", req.url);
-//       console.log("Original Url: ", req.originalUrl);
-//     })
-//   });
-  
+// Get builds list
+router.get('/getBuildlist',function (req,res,next) {
+    Build.find({},function (err,docs) {
+        res.send(docs);
+        console.log("Get build list")
+    })
+})
+
+// Get units list
+router.get('/getUnitlist',function (req,res,next) {
+    Unit.find({},function (err,docs) {
+        res.send(docs);
+        console.log("Get unit list")
+    })
+})
+
+
+// Get Unit info
+router.get('/getUnit/:unitId',function (req,res,next) {
+    const unitId = req.params.unitId;
+    const pa = {"UnitId":unitId};
+    Unit.find(pa,function (err,data) {
+        if (data.length > 0){
+            res.json(data);
+            console.log("Unit found");
+            console.log(data);
+        }else{
+            res.json({"status":"404","message":"Unit not found"});
+            console.log("Unit not found")
+        }
+    })
+})
+
+// Search Build
+router.get('/getBuild/:buildId',function (req,res,next) {
+    const buildId = req.params.buildId;
+    Build.find({"BuildVersion":buildId},function (err,data) {
+        console.log(data);
+        console.log(buildId);
+        if (data.length > 0){
+            res.json(data);
+            console.log("Build found");
+            console.log(data)
+        }else{
+            res.json({"status":"404","message":'Build is not found'});
+            console.log("Build not found")
+        }
+    })
+});
+
+
+// Get Build info
+router.get('/getBuild/:buildId',function (req,res,next) {
+    const buildId = String(req.params.buildId);
+    const pa = {"BuildVersion":buildId};
+    Build.find(pa,function (err,data) {
+        if (data.length > 0){
+            res.json(data);
+            console.log("Build found");
+            console.log(data);
+        }else{
+            res.json({"status":"404","message":"Build not found"});
+            console.log("Build not found");
+        }
+    })
+})
+
+// Add unit
+router.post('/unit/add',function (req,res,next) {
+    const unitId = req.body.UnitId;
+    var unit = new Unit({
+        UnitId: unitId,
+    });
+    mongoose.createConnection(unit_db,function(error) {
+        if (error){
+            console.log(error)
+        }else{
+            console.log("Unit DB Connected!")
+        }
+     });
+    console.log(Unit);
+    console.log(unitId)
+    Unit.count({"UnitId":unitId},function (err,data) {
+         console.log(data);
+         if(data > 0){
+             res.json({"status":"406","message":"Unit already exist"});
+             console.log("Unit already exist");
+         }else{
+             unit.save(function (err) {
+                 if(err){
+                     res.send(err);
+                     console.log(err)
+                 }else{
+                     res.json({"status":"202","message":"Success!"});
+                     console.log("Unit added")
+                 }
+             });
+         }
+     });
+});
+
+// Add Build
+router.post('/build/add',function (req,res,next) {
+    const buildId = req.body.BuildId;
+    var build = new Build({
+        BuildVersion: buildId,
+    });
+    
+    console.log(buildId)
+    Build.count({"BuildVersion":buildId},function (err,data) {
+         console.log(data);
+         if(data > 0){
+             res.json({"status":"406","message":"Build already exist"});
+             console.log("Build already exist");
+         }else{
+             build.save(function (err) {
+                 if(err){
+                     res.send(err);
+                     console.log(err)
+                 }else{
+                     res.json({"status":"202","message":"Success!"});
+                     console.log("Unit added")
+                 }
+             });
+         }
+     });
+});
+
 
 // User verification
 router.post('/users/authenticate',function (req,res,next) {
@@ -303,7 +424,7 @@ router.post('/v5/60/units/info/:unitId',function (req,res,next) {
     const unitId = req.params.unitId;
     var cookie =req.body.cookie;
     var options = {
-        url: 'http://10.70.32.60:4480/api/units/info/' + unitId,
+        url: 'http://devtest.v5systems.us:4480/api/units/info/' + unitId,
         method: 'GET',
         headers:{
             'Cookie':cookie

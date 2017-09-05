@@ -7,6 +7,8 @@ var db = 'mongodb://localhost:27017/userDetails';
 mongoose.connect(db,function (error) {
     if (error){
         console.log(error)
+    }else {
+        console.log("User collection connected")
     }
 });
 
@@ -16,7 +18,7 @@ var User_Schema = new Schema({
     Skill: String,
     Project: String,
     admin: Boolean,
-    Password:String
+    Password: String
 });
 
 var User = mongoose.model('users', User_Schema);
