@@ -2,13 +2,13 @@
 <div class="card">
     <div class="card-header clearfix"> 60 Server / Devtest.v5systems.us</div>
     <div class="card-body">
-        <div class="button-area" style="float:left; width:30%">
+        <div class="button-area" style="float:left; width:25%">
             <div></div>
             <button class="btn btn-success btn-raised" (click)="clicklogin60()" >Login</button>
             <button class="btn btn-primary btn-raised" (click)="clickallconnectunit60()" [disabled]="!loggedin60" style="margin-left: 1%"> Units</button>
             <button class="btn btn-warning btn-raised" (click)="get60unitInfo()" [disabled]="!showunits60form" style="margin-left: 1%">Version</button>
         </div>
-        <div class="result-area" style="float:right; width:70%">
+        <div class="result-area" style="float:right; width:75%">
             <div class="row">
                 <div class="table-responsive" style="width: 97%" [hidden]="!showunits60form">
                     <table class="table table-hover">
