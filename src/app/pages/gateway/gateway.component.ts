@@ -113,33 +113,11 @@ export class GatewayComponent {
         }
     }
   }
-//   display60UnitInfo(unitID) {
-//     this.version60 = false;
-//     this.showunits60form = false;
-//     this.showunits60detail = true;
-//     console.log(unitID);
-   
-//     const url = 'api/v5/60/units/info/' + unitID;
-//     console.log(url);
-//     this.http.post(url, {
-//         'cookie': this.cookie60,
-//     }).map(res => {
-//         const bos = res.json().api.responseStatus;
-//         if (bos == 'status_ok') {
-//             this.unitDetail.push({
-//             'unitdetail': res.json().apiData,  
-//         });
-//         }else {
-//         alert('Need to login first');
-//         } 
-//     }).subscribe();
-//     console.log("111");
-//     console.log(this.unitDetail);
-//     }
+
   clicklogin50() {
     this.http.post('api/v5login50', {
         'username': 'v5root',
-        'password': 'v5admin123',
+        'password': '!v55Rocks!',
     }).map(res => {
         console.log(res.json());
         console.log('111', res.json().body);
@@ -173,6 +151,7 @@ export class GatewayComponent {
         if (bos == 'status_ok') {
             this.allcnntdunitlist50 = res.json().apiData;
             this.showunits50form = true;
+            this.version50 = false;
             this.unitversion50 = [];
         }else {
             alert('Need to login first');

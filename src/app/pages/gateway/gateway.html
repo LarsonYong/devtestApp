@@ -102,7 +102,6 @@
                             <tr *ngFor="let userData of allcnntdunitlist50  ; let i = index; trackBy: userId" [hidden]="!userData.status">
                                 <td>{{i+1}}</td>
                                 <td>{{userData.unitId}}</td>
-                
                                 <td>{{userData.attrInfo.networkInfo.unitIp}}</td>
                                 <td>{{userData.attrInfo.v5nmConfig.Config.Interfaces.iface1.Info}}</td>
                                 <td>{{userData.status}}</td>
