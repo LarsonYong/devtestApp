@@ -20,7 +20,7 @@ export const PAGES_MENU = [
         data: {
           menu: {
             title: 'Gateway',
-            icon: 'ion-ios-toggle',
+            icon: 'ion-monitor',
             pathMatch: 'prefix',
             selected: false,
             order: 0,
@@ -28,20 +28,66 @@ export const PAGES_MENU = [
         },
       },
       {
-        path: 'Build',
+        path: '',
         data: {
-          title: 'Build',
-          icon: 'ion-clipboard',
-          pathMatch: 'prefix',
-          selected: false,
-          expand: false,
-          order: 0,
+          menu: {
+            title: 'Build',
+            icon: 'ion-document',
+            pathMatch: 'prefix',
+            selected: false,
+            expand: false,
+            order: 0,
+          },
         },
         children: [
           {
             path: '',
-          }
-        ]
+            data: {
+              menu: {
+                title: 'List',
+              },
+            },
+          },
+          {
+            path: '',
+            data: {
+              menu: {
+                title: 'Detail',
+              },
+            },
+          },
+        ],
+      },
+      {
+        path: '',
+        data: {
+          menu: {
+            title: 'Unit',
+            icon: 'ion-nuclear',
+            pathMatch: 'prefix',
+            selected: false,
+            expand: false,
+            order: 0,
+          },
+        },
+        children: [
+          {
+            path: '',
+            data: {
+              menu: {
+                title: 'History',
+              },
+            },
+          },
+          {
+            path: '',
+            data: {
+              menu: {
+                title: 'Update',
+              },
+            },
+          },
+        ],
       },
       {
         path: 'editors',
@@ -371,7 +417,7 @@ export const PAGES_MENU = [
         data: {
           menu: {
             title: 'User',
-            icon: 'ion-android-person-add',
+            icon: 'ion-ios-personadd',
             pathMatch: 'prefix',
             selected: false,
             order: 800,
