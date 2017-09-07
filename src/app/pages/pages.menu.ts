@@ -28,7 +28,7 @@ export const PAGES_MENU = [
         },
       },
       {
-        path: '',
+        path: 'build',
         data: {
           menu: {
             title: 'Build',
@@ -41,7 +41,7 @@ export const PAGES_MENU = [
         },
         children: [
           {
-            path: '',
+            path: 'list',
             data: {
               menu: {
                 title: 'List',
@@ -49,7 +49,7 @@ export const PAGES_MENU = [
             },
           },
           {
-            path: '',
+            path: 'detail',
             data: {
               menu: {
                 title: 'Detail',
@@ -59,7 +59,7 @@ export const PAGES_MENU = [
         ],
       },
       {
-        path: '',
+        path: 'unit',
         data: {
           menu: {
             title: 'Unit',
@@ -67,12 +67,12 @@ export const PAGES_MENU = [
             pathMatch: 'prefix',
             selected: false,
             expand: false,
-            order: 0,
+            order: 10,
           },
         },
         children: [
           {
-            path: '',
+            path: 'history',
             data: {
               menu: {
                 title: 'History',
@@ -80,7 +80,7 @@ export const PAGES_MENU = [
             },
           },
           {
-            path: '',
+            path: 'Info',
             data: {
               menu: {
                 title: 'Update',
