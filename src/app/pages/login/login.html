@@ -1,6 +1,6 @@
 <div class="auth-main">
   <div class="auth-block">
-    <h1 translate>Sign in to Devtest app</h1>
+    <h1 translate>Welcome to Devtest app</h1>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value )" class="form-horizontal">
       <div class="form-group row" [ngClass]="{'has-error': (!username.valid && username.touched), 'has-success': (username.valid && username.touched)}">

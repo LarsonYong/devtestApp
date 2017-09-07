@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { BuildComponent } from './build.component';
 import { routing } from './build.routing';
-import { BuildListComponent } from './component/list/buildList.component';
+import { BuildListComponent, FilterPipe } from './component/list/buildList.component';
 import { BuildDetailComponent } from './component/detail/detail.component';
 
 @NgModule({
@@ -18,6 +18,7 @@ import { BuildDetailComponent } from './component/detail/detail.component';
     BuildComponent,
     BuildListComponent,
     BuildDetailComponent,
+    FilterPipe,
   ],
 })
 export class BuildModule {}

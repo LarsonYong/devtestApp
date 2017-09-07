@@ -24,7 +24,7 @@
                         </thead>
                         <tbody>
             
-                        <tr *ngFor="let userData of allcnntdunitlist60  ; let i = index; trackBy: userId" [hidden]="!userData.status">
+                        <tr *ngFor="let userData of allcnntdunitlist60  ; let i = index; trackBy: userId" [hidden]="!userData.status" >
                             <td>{{i+1}}</td>
                             <td>{{userData.unitId}}</td>
             
