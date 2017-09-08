@@ -1,1 +1,20 @@
-<h2> This is build detail page </h2>
+<div class="row">
+    <div class="col-md-10"> 
+        <div class = "card">
+            <div class="card-header clearfix">
+                <h3 class="card-title"> Add new build</h3>
+            </div>
+            <div class="card-body">
+                <form class="row form-inline ng-untouched ng-pristine ng-valid">
+                    <div class="form-group col-sm-3">
+                        <input class="form-control" placeholder="Build Version" type="text" #buildversion>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit" (click)=addnewbuild(buildversion.value)> Send new build</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</div>

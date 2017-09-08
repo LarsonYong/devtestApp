@@ -20,7 +20,7 @@ var build_Schema = new Schema({
     TestResult: String,
     Bug: String,
     Description: String,
-    TestUnit: String,
+    TestUnits: String,
     TestDate: String,
     TestDetails: String
 });
@@ -34,7 +34,7 @@ var build_Schema = new Schema({
 //     "Description": "TK1 build,analytics new feature",
 //     "TestType": "Normal",
 //     "TestDate": "",
-//     "TestDeatils": ""
+//     "TestDetails": ""
 // },
 // {
 //     "_id": "59add7b9439993ceb6d0fcc5",

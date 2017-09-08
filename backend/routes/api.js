@@ -97,6 +97,42 @@ router.get('/getBuild/:buildId',function (req,res,next) {
     })
 })
 
+// Update Build info
+router.post('/updateBuild',function (req,res,next) {
+    const buildversion = req.body.BuildVersion;
+    Build.findById(req.body.id, function (err, data) {
+        console.log(req.body.id);
+        console.log(data);
+        if (err) {
+            res.json({"message":err})
+        }else {
+            
+            // Update each attribute with any possible attribute that may have been submitted in the body of the request
+            // If that attribute isn't in the request body, default back to whatever it was before.
+            data.Bug = req.body.Bug || data.Bug;
+            data.BuildType = req.body.BuildType ||data.BuildType;
+            data.Description = req.body.Description ||data.Description;
+            data.TestDate = req.body.TestDate ||data.TestDate;
+            data.TestDetails = req.body.TestDetails ||data.TestDetails;
+            data.TestResult = req.body.TestResult ||data.TestResult;
+            data.TestType = req.body.TestType ||data.TestType;
+            data.TestUnits = req.body.TestUnits ||data.TestUnits;
+            data.save(function(err,data) {
+                if (err) {
+                    res.json({"message":err})
+                }
+                res.json({message: "Build infomation updated"})
+                console.log("build updated")
+            })
+        }
+    })
+
+    // Build.findOneAndUpdate({BuildVersion: req.body.BuildVersion}),{$set:{
+    //     'Bug': req.body.Bug,
+    //     'BuildType': req.body.
+    // }}
+})
+
 // Add unit
 router.post('/unit/add',function (req,res,next) {
     const unitId = req.body.UnitId;
@@ -134,11 +170,12 @@ router.post('/unit/add',function (req,res,next) {
 // Add Build
 router.post('/build/add',function (req,res,next) {
     const buildId = req.body.BuildId;
+    
     var build = new Build({
         BuildVersion: buildId,
     });
-    
-    console.log(buildId)
+    console.log("buildId")
+    console.log("111",buildId)
     Build.count({"BuildVersion":buildId},function (err,data) {
          console.log(data);
          if(data > 0){
