@@ -52,7 +52,7 @@ export const PAGES_MENU = [
             path: 'detail',
             data: {
               menu: {
-                title: 'Detail',
+                title: 'Add build',
               },
             },
           },

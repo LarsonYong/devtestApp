@@ -23,7 +23,7 @@
                         <td>
                         <button class="btn btn-primary bt-xs btn-raised" style="margin-left: 20%" (click)=getbuildinfo(buildData)>Detail</button>
                        
-                        <button class="btn btn-warning bt-xs btn-raised" style="margin-left: 3%">Edit </button>
+                        <button class="btn btn-warning bt-xs btn-raised" style="margin-left: 3%" (click)=editbuildinfo(buildData)>Edit </button>
                         </td>
                     </tr>
                 </table>  
@@ -33,11 +33,11 @@
 </div>
 </div>
 <div class="col-md-6">
-<div class = "card" style="width: 100%">
+    <div class = "card" style="width: 100%" [hidden]="!detailClicked">
         <div class="row">
             <div class="card-header clearfix" style = "width:94%; margin: 0 5% 0 5%">Detail area
             </div>
-            <div class="card-body" style="width:100%;" [hidden]="!detailClicked">
+            <div class="card-body" style="width:100%;" >
                 <table class="table table-bordered" style = "width:90%;margin: 0 0 3% 5%">
                     <tbody>
                         <tr>
@@ -87,10 +87,64 @@
                         </tr>
                         
                     </tbody>
-                </table>
-               
+                </table>    
             </div>
         </div>
-</div>
+    </div>
+    <div class="card" style="width: 100%" [hidden]="!editClicked">
+        <div class="row">
+            <div class="card-header clearfix" style = "width:94%; margin: 0 5% 0 5%">Edit
+            </div>
+            <div class="card-body" style="width:100%;" >
+                <form class="ng-untouched ng-pristine ng-valid" style = "width:90%;margin: 1% 0 3% 5%">
+                    <div class="form-group"  >
+                        <label> Build Version</label>
+                        <input class="form-control"placeholder="{{buildEdit.BuildVersion}}">
+                        
+                    </div>
+                    <div class="form-group"  >
+                        <label> Build Type</label>
+                        <input class="form-control"placeholder="{{buildEdit.BuildType}}">
+                        <span class="help-block sub-little-text">Partial or full build</span>
+                    </div>
+                    <div class="form-group"  >
+                        <label> Description</label>
+                        <input class="form-control"placeholder="{{buildEdit.Description}}">
+                        <span class="help-block sub-little-text">New feature, changes, fiexed and so on</span>
+                    </div>
+                    <div class="form-group"  >
+                        <label>TestType</label>
+                        <input class="form-control"placeholder="{{buildEdit.TestType}}">
+                    </div>
+                    <div class="form-group"  >
+                        <label> TestDate</label>
+                        <input class="form-control"placeholder="{{buildEdit.TestDate}}">
+                        <!-- <span class="help-block sub-little-text">Some help info here</span> -->
+                    </div>
+                    <div class="form-group"  >
+                        <label> TestUnits</label>
+                        <input class="form-control"placeholder="{{buildEdit.TestUnits}}">
+                        <!-- <span class="help-block sub-little-text">Some help info here</span> -->
+                    </div>
+                    <div class="form-group"  >
+                        <label> TestDeatils</label>
+                        <input class="form-control"placeholder="{{buildEdit.TestDeatils}}">
+                        <!-- <span class="help-block sub-little-text"></span> -->
+                    </div>
+                    <div class="form-group"  >
+                        <label> TestResult</label>
+                        <input class="form-control"placeholder="{{buildEdit.TestResult}}">
+                        <!-- <span class="help-block sub-little-text">Some help info here</span> -->
+                        <button class="btn btn-primary btn-lg" style="float:right; margin:3% 3% 2% 0">Save</button>
+                    </div>
+                    <!-- <div class="form-group"  >
+                        <label> Build Version</label>
+                        <input class="form-control"placeholder="{{buildEdit.BuildVersion}}">
+                        <span class="help-block sub-little-text">Some help info here</span>
+                    </div> -->
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 </div>

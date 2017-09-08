@@ -30,7 +30,20 @@ export class BuildListComponent {
     { 'TestType': '' },
     { 'TestUnits': '' },
   ];
+  buildEdit = [
+    { 'BuildVersion': '' },
+    { 'Bug': '' },
+    { 'BuildType': '' },
+    { 'Description': '' },
+    { 'TestDate': '' },
+    { 'TestDeatils': '' },
+    { 'TestResult': '' },
+    { 'TestType': '' },
+    { 'TestUnits': '' },
+  ];
+  
   detailClicked = false;
+  editClicked = false;
   list = ['123', '321'];
   constructor(
       private http: Http,
@@ -51,6 +64,7 @@ export class BuildListComponent {
 
   getbuildinfo(buildversion) {
     this.detailClicked = true;
+    this.editClicked = false;
     this.buildDetail = [];
     this.http.get('api/getBuild/' + buildversion)
       .map(res => {
@@ -58,4 +72,14 @@ export class BuildListComponent {
         console.log(this.buildDetail);
       }).subscribe();
   }
+  editbuildinfo(buildversion) {
+    this.detailClicked = false;
+    this.editClicked = true;
+    this.http.get('api/getBuild/' + buildversion)
+    .map(res => {
+      this.buildEdit = res.json()[0];
+      console.log(this.buildEdit);
+    }).subscribe();
+  }
 }
+ 
