@@ -23,6 +23,7 @@ export const routes: Routes = [
       { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
       { path: 'gateway', loadChildren: './gateway/gateway.module#GatewayModule' },
       { path: 'build', loadChildren: './build/build.module#BuildModule' },
+      { path: 'unit', loadChildren: './unit/unit.module#UnitModule' },
       { path: 'userAdmin', loadChildren: './userAdmin/userAdmin.module#UserAdmin' },
       { path: 'editors', loadChildren: './editors/editors.module#EditorsModule' },
       { path: 'components', loadChildren: './components/components.module#ComponentsModule' },
@@ -31,6 +32,7 @@ export const routes: Routes = [
       { path: 'forms', loadChildren: './forms/forms.module#FormsModule' },
       { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
       { path: 'maps', loadChildren: './maps/maps.module#MapsModule' },
+      
     ],
     canActivate: [AuthenticationGuard],
   },
