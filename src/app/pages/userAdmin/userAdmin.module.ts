@@ -1,4 +1,4 @@
-import { UserServices } from './../../services/user.service';
+import { UserServices } from '../../services/user.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';

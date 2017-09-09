@@ -30,7 +30,7 @@ export class UserAdminComponent {
         this.showalert = false;
         this.showsuccess = false;
         this.showuserlist();
-        console.log("submitted: " + this.submitted)
+        console.log("submitted: " + this.submitted);
     }
     showuserlist() {
         // document.getElementById('userlistbttn').classList.add('active');

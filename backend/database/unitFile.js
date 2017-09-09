@@ -19,8 +19,7 @@ var Unit_Schema = new Schema({
     CameraType: String,
     BuildVersion: String,
     SensorVersion: String,
-    UpdateTime: String,
-    BuildVersion: String
+    UpdateTime: String
 });
 
 // [

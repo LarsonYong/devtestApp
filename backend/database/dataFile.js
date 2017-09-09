@@ -4,7 +4,7 @@
 var mongoose = require('mongoose');
 // Connection URL
 var db = 'mongodb://localhost:27017/userDetails';
-mongoose.createConnection(db,function (error) {
+mongoose.connect(db,function (error) {
     if (error){
         console.log(error)
     }else {
