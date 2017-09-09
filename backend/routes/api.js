@@ -21,14 +21,13 @@ var request = require('request');
 
 
 // Get users list
-router.get('/getUserlist',function(req,resp,next){
+router.get('/getUserlist',function(req,res,next){
     User.find({},function (err,docs) {
-        resp.send(docs);
+        res.send(docs);
         console.log("Get user list");
-        console.log("url: ", req.url);
-        console.log("Original Url: ", req.originalUrl);
     })
 });
+
 
 // Get builds list
 router.get('/getBuildlist',function (req,res,next) {

@@ -29,10 +29,7 @@ export class UserAdminComponent {
         this.showUserlist = true;
         this.showalert = false;
         this.showsuccess = false;
-        this.userService.getUserList()
-        .subscribe(
-            (data) => (this.UserList = data.json()),
-        );
+        this.showuserlist();
         console.log("submitted: " + this.submitted)
     }
     showuserlist() {
