@@ -7,10 +7,15 @@
             </div>
             <div class="card-body" style="width:100%; ">
                 <div style="height: 200px"> 
-                <div class="" style="display:inline; flaot:left; width:30%; margin: 1% 0 0 1%">
-                <button  aria-haspopup="true" class="btn btnbtn btn-primary dropdown-toggle" style="margin:1% 0 0 5%">Select Unit</button>
+                <div ngbDropdown class="btn-group dropdown" style="display:inline; flaot:left; width:30%; margin: 1% 0 0 1%" ngbDropdown>
+                    <button class="btn btn-primary dropdown-toggle" type="button" style="margin:1% 0 0 5%" id="drop_down_1" ngbDropdownToggle>Select Unit</button>
+                    <ul class="dropdown-menu" style="margin:8% 0 0 22%" aria-labelledby="drop_down_1">
+                        <li class="dropdown-item"  *ngFor="let item of Unit_List" (click)=select_unit(item)>
+                            {{item}}
+                        </li>
+                    </ul>
                 </div> 
-                <div class="" style="float:right; width:70%;margin-right:5%">
+                <div class="" style="float:right; width:70%;margin-right:5%" >
                     <div class=" table-responsive" style="margin:0 10% 3% 0">
                         <table class="table table-hover" >
                             <tbody>

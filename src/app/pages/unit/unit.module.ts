@@ -1,7 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { NgbDropdownModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { UnitComponent } from './unit.component';
 import { routing } from './unit.routing';
 import { UnitHistoryComponent } from './component/history/history.component';
@@ -11,6 +11,7 @@ import { UnitHistoryComponent } from './component/history/history.component';
     CommonModule,
     FormsModule,
     routing,
+    NgbDropdownModule,
     
   ],
   declarations: [
