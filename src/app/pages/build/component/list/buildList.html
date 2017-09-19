@@ -104,41 +104,41 @@
                     </div>
                     <div class="form-group"  >
                         <label> Build Type</label>
-                        <input class="form-control" name="buildtype" #buildtype placeholder="{{buildEdit.BuildType}}" required>
+                        <input class="form-control" name="buildtype" #buildtype defaultValue="{{buildEdit.BuildType}}" defaultValue="{{buildEdit.BuildType}}" required>
                         <span class="help-block sub-little-text">Partial or full build</span>
                     </div>
                     <div class="form-group"  >
                         <label> Description</label>
-                        <input class="form-control"  name="description" #description  placeholder="{{buildEdit.Description}}">
+                        <input class="form-control"  name="description" #description  defaultValue="{{buildEdit.Description}}">
                         <span class="help-block sub-little-text">New feature, changes, fixes</span>
                     </div>
                     <div class="form-group"  >
                         <label>TestType</label>
-                        <input class="form-control" name="testtype" #testtype placeholder="{{buildEdit.TestType}}">
+                        <input class="form-control" name="testtype" #testtype defaultValue="{{buildEdit.TestType}}">
                     </div>
                     <div class="form-group"  >
                         <label> TestDate</label>
-                        <input class="form-control" name="testdate" #testdate placeholder="{{buildEdit.TestDate}}">
+                        <input class="form-control" name="testdate" #testdate defaultValue="{{buildEdit.TestDate}}">
                         <!-- <span class="help-block sub-little-text">Some help info here</span> -->
                     </div>
                     <div class="form-group"  >
                         <label> TestUnits</label>
-                        <input class="form-control" name="testunits" #testunits placeholder="{{buildEdit.TestUnits}}">
+                        <input class="form-control" name="testunits" #testunits defaultValue="{{buildEdit.TestUnits}}">
                         <!-- <span class="help-block sub-little-text">Some help info here</span> -->
                     </div>
                     <div class="form-group"  >
                         <label> TestDetails</label>
-                        <textarea class="form-control" name="testdetails" #testdetails placeholder="{{buildEdit.TestDetails}}"></textarea>
+                        <textarea class="form-control" name="testdetails" #testdetails defaultValue="{{buildEdit.TestDetails}}"></textarea>
                         <!-- <span class="help-block sub-little-text"></span> -->
                     </div>
                     <div class="form-group"  >
                         <label> Bug</label>
-                        <input class="form-control" name="bug" #bug placeholder="{{buildEdit.Bug}}">
+                        <input class="form-control" name="bug" #bug defaultValue="{{buildEdit.Bug}}">
                         <!-- <span class="help-block sub-little-text"></span> -->
                     </div>
                     <div class="form-group"  >
                         <label> TestResult</label>
-                        <input class="form-control" name="testresult" #testresult placeholder="{{buildEdit.TestResult}}">
+                        <input class="form-control" name="testresult" #testresult defaultValue="{{buildEdit.TestResult}}">
                         <!-- <span class="help-block sub-little-text">Some help info here</span> -->
                         <button class="btn btn-primary " style="float:right; margin:3% 3% 2% 0" (click)=savebuildinfo(buildEdit._id,buildEdit.BuildVersion,buildtype.value,description.value,testtype.value,testdate.value,testunits.value,testdetails.value,bug.value,testresult.value) >Save information</button>
                     </div>

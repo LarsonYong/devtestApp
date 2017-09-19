@@ -17,22 +17,22 @@
                 </div> 
                 <div class="" style="float:right; width:70%;margin-right:5%" >
                     <div class=" table-responsive" style="margin:0 10% 3% 0">
-                        <table class="table table-hover" >
+                        <table class="table table-bordered" >
                             <tbody>
                             <tr>
                                 <!-- <td>1</td> -->
-                                <td>BuildVersion </td>
-                                <td>someditail</td>
+                                <td>Unit ID </td>
+                                <td style="text-align:center">{{UnitDetail.UnitId}}</td>
                             </tr>
                             <tr>
                                 <!-- <td>1</td> -->
-                                <td>BuildVersion </td>
-                                <td>someditail</td>
+                                <td>Platform </td>
+                                <td style="text-align:center">{{UnitDetail.Platform}}</td>
                             </tr>
                             <tr>
                                 <!-- <td>1</td> -->
-                                <td>BuildVersion </td>
-                                <td>someditail</td>
+                                <td>Camera </td>
+                                <td style="text-align:center">{{UnitDetail.CameraType}}</td>
                             </tr>
                             <tbody>
                         </table>
@@ -45,13 +45,13 @@
                         </div>
                         <form class="row form-inline ng-untouched ng-pristine ng-valid" style="margin: 2% 0 2% 5%">
                             <div class="form-group col-sm-5">
-                                <input class="form-control" placeholder="Build Version" type="text" #buildversion>
+                                <input class="form-control" placeholder="Build Version" type="text" #buildVersion>
                             </div>
                             <div class="form-group col-sm-3">
-                                <input class="form-control" placeholder="Update time" type="text" #buildversion>
+                                <input class="form-control" placeholder="Update time" type="text" #updatedTime>
                             </div>
                         <div class="form-group">
-                            <button class="btn btn-primary" type="submit" > Submit</button>
+                            <button class="btn btn-primary" type="submit" [disabled]="!getHistory" (click)=add_updateTime(UnitDetail.UnitId,buildVersion.value,updatedTime.value) > Submit</button>
                         </div>
                 </form>
                 </div>
@@ -70,21 +70,14 @@
                         <div >
                             <div class=" table-responsive" style="margin-top:0" >
                                 <table class="table table-hover" style="width: 90%;margin: 0 5% 2% 5%" >
+                                    <thead>
+                                        <td style="text-align:center">Build Version</td>
+                                        <td >Updated Time</td>
+                                    </thead>
                                     <tbody>
-                                    <tr>
-                                        <!-- <td>1</td> -->
-                                        <td>BuildVersion </td>
-                                        <td>someditail</td>
-                                    </tr>
-                                    <tr>
-                                        <!-- <td>1</td> -->
-                                        <td>BuildVersion </td>
-                                        <td>someditail</td>
-                                    </tr>
-                                    <tr>
-                                        <!-- <td>1</td> -->
-                                        <td>BuildVersion </td>
-                                        <td>someditail</td>
+                                    <tr *ngFor="let item of BuildHistory">
+                                        <td>{{item.Build}} </td>
+                                        <td>{{item.Time}}</td>
                                     </tr>
                                     <tbody>
                                 </table>

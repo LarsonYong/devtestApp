@@ -62,6 +62,26 @@ router.get('/getUnit/:unitId',function (req,res,next) {
     })
 })
 
+
+// Update unit build history
+router.post('/UpdateHistory/', function (req,res,next) {
+    const UnitId = req.body.UnitId;
+    const Id = req.body.Id;
+    const build = req.body.Build;
+    const time = req.body.Time;
+    const query = {'UnitId': UnitId}
+    const update = {$push:{'BuildHistory':{"Build":build,"Time":time}}}
+    Unit.update(query, update,function(err) {
+        if (err) {
+            console.log(err);
+        }else {
+            console.log("Updated")
+            res.json({"message":'Updated'})
+        }
+    })
+})
+
+
 // Search Build
 router.get('/getBuild/:buildId',function (req,res,next) {
     const buildId = req.params.buildId;
@@ -95,6 +115,7 @@ router.get('/getBuild/:buildId',function (req,res,next) {
         }
     })
 })
+
 
 // Update Build info
 router.post('/updateBuild',function (req,res,next) {

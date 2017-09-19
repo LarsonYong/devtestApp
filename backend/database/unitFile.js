@@ -13,13 +13,19 @@ mongoose.createConnection(db,function (error) {
 });
 
 var Schema = mongoose.Schema;
+var buildhistory = new Schema({
+    Build: String,
+    Time: String
+}) 
 var Unit_Schema = new Schema({
     UnitId: String,
     Platform: String,
     CameraType: String,
     BuildVersion: String,
     SensorVersion: String,
-    UpdateTime: String
+    UpdateTime: String,
+    BuildHistory: [buildhistory],
+    
 });
 
 // [
