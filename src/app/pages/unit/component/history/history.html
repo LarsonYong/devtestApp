@@ -10,8 +10,8 @@
                 <div ngbDropdown class="btn-group dropdown" style="display:inline; flaot:left; width:30%; margin: 1% 0 0 1%" ngbDropdown>
                     <button class="btn btn-primary dropdown-toggle" type="button" style="margin:1% 0 0 5%" id="drop_down_1" ngbDropdownToggle>Select Unit</button>
                     <ul class="dropdown-menu" style="margin:8% 0 0 22%" aria-labelledby="drop_down_1">
-                        <li class="dropdown-item"  *ngFor="let item of Unit_List" (click)=select_unit(item)>
-                            {{item}}
+                        <li class="dropdown-item"  (click)=onChange(item) *ngFor="let item of Unit_List" >
+                            <a>{{item}}</a>
                         </li>
                     </ul>
                 </div> 
@@ -20,17 +20,14 @@
                         <table class="table table-bordered" >
                             <tbody>
                             <tr>
-                                <!-- <td>1</td> -->
                                 <td>Unit ID </td>
                                 <td style="text-align:center">{{UnitDetail.UnitId}}</td>
                             </tr>
                             <tr>
-                                <!-- <td>1</td> -->
                                 <td>Platform </td>
                                 <td style="text-align:center">{{UnitDetail.Platform}}</td>
                             </tr>
                             <tr>
-                                <!-- <td>1</td> -->
                                 <td>Camera </td>
                                 <td style="text-align:center">{{UnitDetail.CameraType}}</td>
                             </tr>

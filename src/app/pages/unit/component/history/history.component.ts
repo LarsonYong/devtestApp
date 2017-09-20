@@ -9,17 +9,26 @@ import { RequestOptions, Request, RequestMethod, Http } from '@angular/http';
 export class UnitHistoryComponent {
   message= '';
   Unit_List = ['1071', '12125', '12156', '13304', '31116'];
-  UnitDetail = [];
-  BuildHistory = [];
+  UnitDetail= [{
+    'UnitId': '',
+    'Platform': '',
+    'Camera': '',
+  }];
+  BuildHistory= [{
+    '': '',
+  }];
+
   getHistory = false;
   selectedUnit = String;
   constructor(
     private http: Http,
   ) {
   }
+  onChange(id) {
+    console.log(id);
+    this.select_unit(id);
+  }
   select_unit(unitID) {
-    this.UnitDetail = [];
-    this.BuildHistory = [];
     console.log(unitID);
     const reqSting = 'api/getUnit/' + unitID
     this.http.get(reqSting)
