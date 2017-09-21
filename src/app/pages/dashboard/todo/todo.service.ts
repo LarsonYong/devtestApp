@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TodoService {
@@ -18,5 +18,9 @@ export class TodoService {
 
   getTodoList() {
     return this._todoList;
+  }
+
+  saveTodoList() {
+    console.log(this._todoList);
   }
 }

@@ -1,21 +1,24 @@
-import {Component} from '@angular/core';
-import {BaThemeConfigProvider} from '../../../theme';
+import { Component } from '@angular/core';
+import { BaThemeConfigProvider } from '../../../theme';
 
-import {TodoService} from './todo.service';
+import { TodoService } from './todo.service';
 
 @Component({
   selector: 'todo',
   templateUrl: './todo.html',
-  styleUrls: ['./todo.scss']
+  styleUrls: ['./todo.scss'],
 })
 export class Todo {
 
   public dashboardColors = this._baConfig.get().colors.dashboard;
 
-  public todoList:Array<any>;
-  public newTodoText:string = '';
+  public todoList: Array<any>;
+  public newTodoText: string = '';
 
-  constructor(private _baConfig:BaThemeConfigProvider, private _todoService:TodoService) {
+  constructor(
+    private _baConfig: BaThemeConfigProvider,
+    private _todoService: TodoService,
+  ) {
     this.todoList = this._todoService.getTodoList();
 
     this.todoList.forEach((item) => {
@@ -24,9 +27,9 @@ export class Todo {
   }
 
   getNotDeleted() {
-    return this.todoList.filter((item:any) => {
-      return !item.deleted
-    })
+    return this.todoList.filter((item: any) => {
+      return !item.deleted;
+    });
   }
 
   addToDoItem($event) {
@@ -38,6 +41,7 @@ export class Todo {
         color: this._getRandomColor(),
       });
       this.newTodoText = '';
+      this._todoService.saveTodoList();
     }
   }
 

@@ -12,6 +12,7 @@ var User = require('../database/dataFile');
 var unit_db = 'mongodb://localhost:27017/unitDetails';
 var Unit = require('../database/unitFile');
 var Build = require('../database/buildFile');
+var Todo = require('../database/todoFile');
 var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
@@ -33,7 +34,7 @@ router.get('/getUserlist',function(req,res,next){
 router.get('/getBuildlist',function (req,res,next) {
     Build.find({},function (err,docs) {
         res.send(docs);
-        console.log("Get build list")
+        console.log("Get build list");
     })
 })
 
@@ -59,6 +60,16 @@ router.get('/getUnit/:unitId',function (req,res,next) {
             res.json({"status":"404","message":"Unit not found"});
             console.log("Unit not found")
         }
+    })
+})
+
+
+// Get Todo list
+router.get('/getTodolist', function (req,res,next) {
+    Todo.find({}, function (err, docs) {
+        res.send(docs);
+        console.log('Get Todo list');
+        console.log(docs);
     })
 })
 

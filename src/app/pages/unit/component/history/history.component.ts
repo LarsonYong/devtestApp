@@ -24,11 +24,12 @@ export class UnitHistoryComponent {
     private http: Http,
   ) {
   }
-  onChange(id) {
-    console.log(id);
-    this.select_unit(id);
-  }
+
+
+
+
   select_unit(unitID) {
+    console.log("1231231213");
     console.log(unitID);
     const reqSting = 'api/getUnit/' + unitID
     this.http.get(reqSting)
@@ -38,9 +39,17 @@ export class UnitHistoryComponent {
       this.BuildHistory = res.json()[0].BuildHistory;
       console.log(this.BuildHistory);
       this.getHistory = true;
-      this.select_unit = unitID;
+      this.selectedUnit = unitID;
     }).subscribe();
   }
+
+
+  onChange(id) {
+    console.log(id);
+    this.select_unit(id);
+  }
+
+
   add_updateTime(unitId, build, time) {
     const po = {
       'UnitId': unitId,
@@ -52,12 +61,10 @@ export class UnitHistoryComponent {
       this.message = res.json().message;
       console.log(res.json().message);
       alert(res.json().message);
-      
     }).subscribe();
 
-    const reqSting = 'api/getUnit/' + this.select_unit;
-    this.http.get(reqSting)
-    .map(res => {
+    const reqSting = 'api/getUnit/' + this.selectedUnit;
+    this.http.get(reqSting).map(res => {
       this.UnitDetail = res.json()[0]; 
       console.log(this.UnitDetail);
       this.BuildHistory = res.json()[0].BuildHistory;
