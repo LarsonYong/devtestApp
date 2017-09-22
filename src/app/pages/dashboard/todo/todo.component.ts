@@ -19,8 +19,10 @@ export class Todo {
     private _baConfig: BaThemeConfigProvider,
     private _todoService: TodoService,
   ) {
-    this.todoList = this._todoService.getTodoList();
-
+    const aaa = this._todoService.getTodoList();
+    console.log(aaa);
+    this.todoList = aaa; 
+    console.log("111" + this.todoList);
     this.todoList.forEach((item) => {
       item.color = this._getRandomColor();
     });

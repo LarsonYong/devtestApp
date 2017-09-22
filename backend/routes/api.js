@@ -71,6 +71,13 @@ router.get('/getTodolist', function (req,res,next) {
         console.log('Get Todo list');
         console.log(docs);
     })
+    // Todo.update({"_id":ObjectID("59c2f552351ece59c36102b6")}, {$set:{'123':'123'}}, function(err, data) {
+    //     if (err) {
+    //         console.log(err);
+    //     }else {
+    //         console.log(data);
+    //     }
+    // })
 })
 
 
