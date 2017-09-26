@@ -120,19 +120,35 @@ router.post('/UpdateTodolist', function (req,res,next) {
     //     {"text":"999"},
     //     {"text":"999"}
     // ];
+    
+    // {
+    //     "list":[
+    //     {"text":"999"},
+    //     {"text":"9199"},
+    //     {"text":"2999"},
+    //     {"text":"399"},
+    //     {"text":"9699"},
+    //     {"text":"9599"},
+    //     {"text":"9799"},
+    //     {"text":"9699"},
+    //     {"text":"9998"},
+    //     {"text":"9099"}
+    
+    //     ]
+    // }
 
-    Todo.update({_id: "59c44a12f4ff4422c2ae0e05"},{"$set":{l1:'123'}}, function (err, data) {
+    Todo.findByIdAndUpdate('59c9c1f43f987a9e8761f2f1',{$set:{list:listt}},{ new: true }, function (err, data) {
         if (err) {
             console.log(err);
             res.json({"message" : err})
         }else {
-            console.log(data);
+            console.log("Saved data: ", data);
             console.log('Todo list saved')
             res.json({"message" : "Success"})
             
         }
     })
-    Todo.find({_id: ObjectID("59c44a12f4ff4422c2ae0e05")}, function (err, data) {
+    Todo.find({todolist: "todo"}, function (err, data) {
         console.log(data[0]);
     })
 })
@@ -150,7 +166,7 @@ router.get('/getBuild/:buildId',function (req,res,next) {
             console.log(data)
         }else{
             res.json({"status":"404","message":'Build is not found'});
-            console.log("Build not found")
+            console.log("Build not found");
         }
     })
 });

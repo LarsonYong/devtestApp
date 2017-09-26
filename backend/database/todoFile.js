@@ -16,10 +16,14 @@ mongoose.createConnection(db,function (error) {
 
 
 var Schema = mongoose.Schema;
-var Todo_Schema = new Schema({
+var listdetail = new Schema({
     text: String,
     color: String,
     isActive: String
+}) 
+var Todo_Schema = new Schema({
+    list: [listdetail],
+    todolist: String
 });
 
 // {
