@@ -100,6 +100,44 @@ router.post('/UpdateHistory/', function (req,res,next) {
 })
 
 
+// Save Todo list
+router.post('/UpdateTodolist', function (req,res,next) {
+    const listt = req.body.list
+    console.log(listt);
+    // Todo.findById('59c44a12f4ff4422c2ae0e05', function (err, data) {
+    //     console.log(data);
+    //     res.send(data);
+    // })
+    // const listtt = [
+    //     {"text":"999"},
+    //     {"text":"999"},
+    //     {"text":"999"},
+    //     {"text":"999"},
+    //     {"text":"999"},
+    //     {"text":"999"},
+    //     {"text":"999"},
+    //     {"text":"999"},
+    //     {"text":"999"},
+    //     {"text":"999"}
+    // ];
+
+    Todo.update({_id: "59c44a12f4ff4422c2ae0e05"},{"$set":{l1:'123'}}, function (err, data) {
+        if (err) {
+            console.log(err);
+            res.json({"message" : err})
+        }else {
+            console.log(data);
+            console.log('Todo list saved')
+            res.json({"message" : "Success"})
+            
+        }
+    })
+    Todo.find({_id: ObjectID("59c44a12f4ff4422c2ae0e05")}, function (err, data) {
+        console.log(data[0]);
+    })
+})
+
+
 // Search Build
 router.get('/getBuild/:buildId',function (req,res,next) {
     const buildId = req.params.buildId;
