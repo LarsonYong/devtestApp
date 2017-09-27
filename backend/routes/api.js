@@ -36,7 +36,7 @@ router.get('/getBuildlist',function (req,res,next) {
         res.send(docs);
         console.log("Get build list");
     })
-})
+});
 
 // Get units list
 router.get('/getUnitlist',function (req,res,next) {
@@ -44,7 +44,7 @@ router.get('/getUnitlist',function (req,res,next) {
         res.send(docs);
         console.log("Get unit list")
     })
-})
+});
 
 
 // Get Unit info
@@ -61,24 +61,18 @@ router.get('/getUnit/:unitId',function (req,res,next) {
             console.log("Unit not found")
         }
     })
-})
+});
 
 
-// Get Todo list
+// Get tod list
 router.get('/getTodolist', function (req,res,next) {
-    Todo.find({}, function (err, docs) {
-        res.send(docs);
+    Todo.find({_id : ObjectID("59c44a12f4ff4422c2ae0e05")}, function (err, docs) {
+        res.send(docs[0].list);
         console.log('Get Todo list');
         console.log(docs);
     })
-    // Todo.update({"_id":ObjectID("59c2f552351ece59c36102b6")}, {$set:{'123':'123'}}, function(err, data) {
-    //     if (err) {
-    //         console.log(err);
-    //     }else {
-    //         console.log(data);
-    //     }
-    // })
-})
+
+});
 
 
 // Update unit build history
@@ -87,22 +81,22 @@ router.post('/UpdateHistory/', function (req,res,next) {
     const Id = req.body.Id;
     const build = req.body.Build;
     const time = req.body.Time;
-    const query = {'UnitId': UnitId}
-    const update = {$push:{'BuildHistory':{"Build":build,"Time":time}}}
+    const query = {'UnitId': UnitId};
+    const update = {$push:{'BuildHistory':{"Build":build,"Time":time}}};
     Unit.update(query, update,function(err) {
         if (err) {
             console.log(err);
         }else {
-            console.log("Updated")
+            console.log("Updated");
             res.json({"message":'Updated'})
         }
     })
-})
+});
 
 
 // Save Todo list
 router.post('/UpdateTodolist', function (req,res,next) {
-    const listt = req.body.list
+    const listt = req.body.list;
     console.log(listt);
     // Todo.findById('59c44a12f4ff4422c2ae0e05', function (err, data) {
     //     console.log(data);
@@ -120,38 +114,22 @@ router.post('/UpdateTodolist', function (req,res,next) {
     //     {"text":"999"},
     //     {"text":"999"}
     // ];
-    
-    // {
-    //     "list":[
-    //     {"text":"999"},
-    //     {"text":"9199"},
-    //     {"text":"2999"},
-    //     {"text":"399"},
-    //     {"text":"9699"},
-    //     {"text":"9599"},
-    //     {"text":"9799"},
-    //     {"text":"9699"},
-    //     {"text":"9998"},
-    //     {"text":"9099"}
-    
-    //     ]
-    // }
 
-    Todo.findByIdAndUpdate('59c9c1f43f987a9e8761f2f1',{$set:{list:listt}},{ new: true }, function (err, data) {
+    Todo.update({_id: ObjectID("59c44a12f4ff4422c2ae0e05")},{$set:{list:listt}}, function (err, data) {
         if (err) {
             console.log(err);
             res.json({"message" : err})
         }else {
-            console.log("Saved data: ", data);
-            console.log('Todo list saved')
+            console.log(data);
+            console.log('Todo list saved');
             res.json({"message" : "Success"})
             
         }
-    })
-    Todo.find({todolist: "todo"}, function (err, data) {
+    });
+    Todo.find({_id: ObjectID("59c44a12f4ff4422c2ae0e05")}, function (err, data) {
         console.log(data[0]);
     })
-})
+});
 
 
 // Search Build
@@ -166,7 +144,7 @@ router.get('/getBuild/:buildId',function (req,res,next) {
             console.log(data)
         }else{
             res.json({"status":"404","message":'Build is not found'});
-            console.log("Build not found");
+            console.log("Build not found")
         }
     })
 });
@@ -186,7 +164,7 @@ router.get('/getBuild/:buildId',function (req,res,next) {
             console.log("Build not found");
         }
     })
-})
+});
 
 
 // Update Build info
@@ -213,7 +191,7 @@ router.post('/updateBuild',function (req,res,next) {
                 if (err) {
                     res.json({"message":err})
                 }
-                res.json({message: "Build infomation updated"})
+                res.json({message: "Build infomation updated"});
                 console.log("build updated")
             })
         }
@@ -223,13 +201,13 @@ router.post('/updateBuild',function (req,res,next) {
     //     'Bug': req.body.Bug,
     //     'BuildType': req.body.
     // }}
-})
+});
 
 // Add unit
 router.post('/unit/add',function (req,res,next) {
     const unitId = req.body.UnitId;
     var unit = new Unit({
-        UnitId: unitId,
+        UnitId: unitId
     });
     mongoose.createConnection(unit_db,function(error) {
         if (error){
@@ -239,7 +217,7 @@ router.post('/unit/add',function (req,res,next) {
         }
      });
     console.log(Unit);
-    console.log(unitId)
+    console.log(unitId);
     Unit.count({"UnitId":unitId},function (err,data) {
          console.log(data);
          if(data > 0){
@@ -264,10 +242,10 @@ router.post('/build/add',function (req,res,next) {
     const buildId = req.body.BuildId;
     
     var build = new Build({
-        BuildVersion: buildId,
+        BuildVersion: buildId
     });
-    console.log("buildId")
-    console.log("111",buildId)
+    console.log("buildId");
+    console.log("111",buildId);
     Build.count({"BuildVersion":buildId},function (err,data) {
          console.log(data);
          if(data > 0){

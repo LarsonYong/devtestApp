@@ -20,7 +20,7 @@ var listdetail = new Schema({
     text: String,
     color: String,
     isActive: String
-}) 
+}) ;
 var Todo_Schema = new Schema({
     list: [listdetail],
     todolist: String

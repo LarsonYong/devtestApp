@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaThemeConfigProvider } from '../../../theme';
-
+import { RequestOptions, Request, RequestMethod, Http } from '@angular/http';
 import { TodoService } from './todo.service';
 
 @Component({
@@ -8,23 +8,34 @@ import { TodoService } from './todo.service';
   templateUrl: './todo.html',
   styleUrls: ['./todo.scss'],
 })
-export class Todo {
+export class Todo implements OnInit{
+  received= [];
+  dashboardColors = this._baConfig.get().colors.dashboard;
+  result: string[];
+  todoList = [];
+  newTodoText: string = '';
+  todoList1= [];
 
-  public dashboardColors = this._baConfig.get().colors.dashboard;
-
-  public todoList: Array<any>;
-  public newTodoText: string = '';
 
   constructor(
     private _baConfig: BaThemeConfigProvider,
     private _todoService: TodoService,
+    private http: Http
   ) {
-    const aaa = this._todoService.getTodoList();
-    console.log(aaa);
-    this.todoList = aaa; 
-    console.log("111" + this.todoList);
+      this.todoList = this._todoService.getTodolist();
+    // this.todoList = this._todoService.getTodolist();
+    // console.log('WTF why not in here?', this.todoList);
+    //
+    // this.todoList.forEach((item) => {
+    //   item.color = this._getRandomColor();
+    // });
+  }
+
+  ngOnInit() {
+
+    console.log('WTF why not in here?', this.todoList);
     this.todoList.forEach((item) => {
-      item.color = this._getRandomColor();
+        item.color = this._getRandomColor();
     });
   }
 
@@ -32,6 +43,30 @@ export class Todo {
     return this.todoList.filter((item: any) => {
       return !item.deleted;
     });
+  }
+
+  // getTodolist () {
+  //   this.http.get('/api/getTodolist').map((data: any) => {
+  //     data = data.json()[0].list[0];
+  //     return data;
+  //   }).subscribe( (data: any) => {
+  //         this.receivedlist = data;
+  //         console.log("I can see the data here: ", this.receivedlist);
+  //       })
+  // }
+
+  deleteFun(item) {
+    item.deleted = true;
+    console.log("item: ", item);
+    console.log("text: ", item.text);
+    console.log("list: ", this.todoList[0].text);
+    for (let i = 0, len = this.todoList.length; i < len - 1; i++) {
+      console.log("1232312");
+      if (this.todoList[i].text == item.text) {
+          this.todoList[i].text = '';
+      }
+    }
+    this._todoService.saveTodoList(this.todoList)
   }
 
   addToDoItem($event) {
@@ -43,14 +78,14 @@ export class Todo {
         color: this._getRandomColor(),
       });
       this.newTodoText = '';
-      this._todoService.saveTodoList();
+      console.log("Saved list: ", this.todoList);
+      this._todoService.saveTodoList(this.todoList);
     }
   }
 
   private _getRandomColor() {
     let colors = Object.keys(this.dashboardColors).map(key => this.dashboardColors[key]);
-
-    var i = Math.floor(Math.random() * (colors.length - 1));
+    let i = Math.floor(Math.random() * (colors.length - 1));
     return colors[i];
   }
 }
