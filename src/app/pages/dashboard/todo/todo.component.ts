@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaThemeConfigProvider } from '../../../theme';
 import { RequestOptions, Request, RequestMethod, Http } from '@angular/http';
 import { TodoService } from './todo.service';
+import { WebApiPromiseService } from '../../../services/web-api-promise-service';
 
 @Component({
   selector: 'todo',
@@ -20,9 +21,10 @@ export class Todo implements OnInit{
   constructor(
     private _baConfig: BaThemeConfigProvider,
     private _todoService: TodoService,
-    private http: Http
+    private http: Http,
+    private moviPromiseService: WebApiPromiseService,
   ) {
-      this.todoList = this._todoService.getTodolist();
+     
     // this.todoList = this._todoService.getTodolist();
     // console.log('WTF why not in here?', this.todoList);
     //
@@ -32,7 +34,12 @@ export class Todo implements OnInit{
   }
 
   ngOnInit() {
-
+    this.moviPromiseService.getService('/api/getTodolist')
+      .then(result => {
+        this.todoList = result;
+        console.log('WTF: ', result);
+      })
+      .catch(error => console.log(error));
     console.log('WTF why not in here?', this.todoList);
     this.todoList.forEach((item) => {
         item.color = this._getRandomColor();

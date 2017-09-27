@@ -4,6 +4,7 @@ import { RequestOptions, Request, RequestMethod, Http } from '@angular/http';
 @Injectable()
 export class TodoService {
   receivedlist = [];
+  message = '';
   constructor(private http: Http) {
   }
   private _todoList = [];
@@ -42,7 +43,13 @@ export class TodoService {
 
   saveTodoList(list) {
     // console.log(,this._todoList);
-    console.log('Save todo list: ', list)
+    console.log('Save todo list: ', list);
+    this.http.post('/api/UpdateTodolist', list)
+      .map(res => {
+        this.message = res.json().message;
+        alert(this.message);
+      }).subscribe();
+  console.log("111", this.message);
   }
 
   

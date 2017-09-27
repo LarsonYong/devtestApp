@@ -66,7 +66,7 @@ router.get('/getUnit/:unitId',function (req,res,next) {
 
 // Get tod list
 router.get('/getTodolist', function (req,res,next) {
-    Todo.find({_id : ObjectID("59c44a12f4ff4422c2ae0e05")}, function (err, docs) {
+    Todo.find({_id : ObjectID("59c9c1f43f987a9e8761f2f1")}, function (err, docs) {
         res.send(docs[0].list);
         console.log('Get Todo list');
         console.log(docs);
@@ -96,26 +96,9 @@ router.post('/UpdateHistory/', function (req,res,next) {
 
 // Save Todo list
 router.post('/UpdateTodolist', function (req,res,next) {
-    const listt = req.body.list;
+    const listt = req.body;
     console.log(listt);
-    // Todo.findById('59c44a12f4ff4422c2ae0e05', function (err, data) {
-    //     console.log(data);
-    //     res.send(data);
-    // })
-    // const listtt = [
-    //     {"text":"999"},
-    //     {"text":"999"},
-    //     {"text":"999"},
-    //     {"text":"999"},
-    //     {"text":"999"},
-    //     {"text":"999"},
-    //     {"text":"999"},
-    //     {"text":"999"},
-    //     {"text":"999"},
-    //     {"text":"999"}
-    // ];
-
-    Todo.update({_id: ObjectID("59c44a12f4ff4422c2ae0e05")},{$set:{list:listt}}, function (err, data) {
+    Todo.update({_id: ObjectID("59c9c1f43f987a9e8761f2f1")},{$set:{list:listt}}, function (err, data) {
         if (err) {
             console.log(err);
             res.json({"message" : err})
@@ -126,7 +109,7 @@ router.post('/UpdateTodolist', function (req,res,next) {
             
         }
     });
-    Todo.find({_id: ObjectID("59c44a12f4ff4422c2ae0e05")}, function (err, data) {
+    Todo.find({_id: ObjectID("59c9c1f43f987a9e8761f2f1")}, function (err, data) {
         console.log(data[0]);
     })
 });

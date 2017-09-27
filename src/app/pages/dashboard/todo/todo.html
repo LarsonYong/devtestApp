@@ -6,9 +6,9 @@
   <ul class="todo-list">
     <!--<li *ngFor="let item of todoList" [ngClass]="{checked: item.isChecked, active: item.isActive}"-->
         <!--(mouseenter)="item.isActive=true" (mouseleave)="item.isActive=false">-->
-    <!-- <li *ngFor="let item of todoList" [ngClass]="{checked: item.isChecked, active: item.isActive}" -->
-        <!-- (mouseenter)="item.isActive=true" (mouseleave)="item.isActive=false"> -->
-    <li *ngFor="let item of todoList">
+    <li *ngFor="let item of getNotDeleted()" [ngClass]="{checked: item.isChecked, active: item.isActive}" 
+         (mouseenter)="item.isActive=true" (mouseleave)="item.isActive=false">
+    <!-- <li *ngFor="let item of todoList"> -->
       <div class="blur-container"><div class="blur-box"></div></div>
 
       <label class="todo-checkbox custom-checkbox custom-input-success">
@@ -16,8 +16,8 @@
         <span class="cut-with-dots">{{ item.text }}</span>
       </label>
       <!-- <i class="remove-todo ion-ios-close-empty" (click)="item.deleted = true"></i> -->
-      <i class="remove-todo ion-ios-close-empty" (click)="delete(item)"></i>
+      <i class="remove-todo ion-ios-close-empty" (click)="deleteFun(item)"></i>
     </li>
   </ul>
-  {{todoList}}
+  
 </div>
