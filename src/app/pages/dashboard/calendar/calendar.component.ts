@@ -32,19 +32,41 @@ export class Calendar {
   public calendarConfiguration: any;
   private _calendar: Object;
   receivedEvent = [];
-
+  isDataAvailable: boolean = false;
+  errorMessage = '';
+  
+  ngOnInit() {
+    console.log("OnInit called")
+    // this.calendarConfiguration = this._calendarService.getData();
+    // this.movePromiseService.getService('/api/getEvents')
+    // .then(result => {
+    //   this.receivedEvent = result; 
+    //   console.log(JSON.stringify(this.calendarConfiguration.events));
+    //   this.receivedEvent.forEach((item) => {
+    //     this.calendarConfiguration.events.push(item);
+    //   })
+      
+    // })
+    // .catch(error => console.log(error));
+    // console.log(this.eventsss);
+    
+    // this.calendarConfiguration.select = (start, end) => this._onSelect(start, end);
+    // console.log(JSON.stringify(this.calendarConfiguration.events));
+  }
 
   constructor(
     private _calendarService: CalendarService,
-    private movePromiseService: WebApiPromiseService
   ) {
-    this._calendarService.readEvent(this.receivedEvent);
-    this.calendarConfiguration = this._calendarService.getData();
+    this.getEventsByPromise();
+    this.calendarConfiguration = this._calendarService.getInitialConfig();
+    this.calendarConfiguration.select = (start, end) => this._onSelect(start, end);
+    // this._calendarService.readEvent(this.receivedEvent);
+    // this.calendarConfiguration = this._calendarService.getData();
 
 
-    this.receivedEvent.forEach( (item) => {
-        this.calendarConfiguration.events.push(item);
-    })
+    // this.receivedEvent.forEach( (item) => {
+    //     this.calendarConfiguration.events.push(item);
+    // })
 
     // this.readEvent(this.receivedEvent);
     // console.log(this.receivedEvent);
@@ -52,25 +74,34 @@ export class Calendar {
     // this.calendarConfiguration.select = (start, end) => this._onSelect(start, end);
   }
 
-  ngOnInit() {
-    
-    // this.calendarConfiguration = this._calendarService.getData();
-    // this.movePromiseService.getService('/api/getEvents')
-    // .then(result => {
-    //   this.receivedEvent = result; 
-    //   this.receivedEvent.forEach((item) => {
-    //     this.calendarConfiguration.events.push(item);
-    //   })
-    // })
-    // .catch(error => console.log(error));
-    console.log(this.eventsss);
-    console.log(this.calendarConfiguration.events);
-    this.calendarConfiguration.select = (start, end) => this._onSelect(start, end);
-  }
+  private getEvents() {
+    this._calendarService.readEvent()
+        .subscribe(
+            calendarEvents => {
+                console.log('API data ready', calendarEvents);
+                jQuery(this._calendar).fullCalendar('removeEvents');
+                jQuery(this._calendar).fullCalendar('addEventSource', calendarEvents);
+                jQuery(this._calendar).fullCalendar('rerenderEvents');
+            },
+            error => this.errorMessage = <any>error);
+}
 
   public onCalendarReady(calendar):void {
     this._calendar = calendar;
   }
+
+  private getEventsByPromise() {
+    this._calendarService.getDataPromise()
+        .then(
+            calendarConfiguration => {
+                this.calendarConfiguration = calendarConfiguration;
+                console.log('API data ready', this.calendarConfiguration);
+                console.log('This calendar: ',calendarConfiguration );
+
+            },
+            error => this.errorMessage = <any>error
+        );
+}
 
   private _onSelect(start, end):void {
 
@@ -86,7 +117,7 @@ export class Calendar {
         jQuery(this._calendar).fullCalendar('renderEvent', eventData, true);
       }
       jQuery(this._calendar).fullCalendar('unselect');
-      console.log("Added event: ", eventData)
+      console.log('Current (working) calendar config: ', this.calendarConfiguration);
     }
   }
 }
