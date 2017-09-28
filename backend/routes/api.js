@@ -13,6 +13,7 @@ var unit_db = 'mongodb://localhost:27017/unitDetails';
 var Unit = require('../database/unitFile');
 var Build = require('../database/buildFile');
 var Todo = require('../database/todoFile');
+var CalEvent = require('../database/eventFile');
 var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
@@ -66,12 +67,23 @@ router.get('/getUnit/:unitId',function (req,res,next) {
 
 // Get tod list
 router.get('/getTodolist', function (req,res,next) {
-    Todo.find({_id : ObjectID("59c9c1f43f987a9e8761f2f1")}, function (err, docs) {
+    Todo.find({_id : ObjectID("59cbf02c99d07dbb6af80459")}, function (err, docs) {
         res.send(docs[0].list);
         console.log('Get Todo list');
         console.log(docs);
     })
 
+});
+
+
+// Get event
+router.get('/getEvents', function (req,res,next) {
+    console.log("got request");
+    CalEvent.find({},function (err,docs) {
+        res.send(docs[0].events);
+        console.log('Get events');
+        console.log(docs[0]);
+    })
 });
 
 
@@ -98,7 +110,7 @@ router.post('/UpdateHistory/', function (req,res,next) {
 router.post('/UpdateTodolist', function (req,res,next) {
     const listt = req.body;
     console.log(listt);
-    Todo.update({_id: ObjectID("59c9c1f43f987a9e8761f2f1")},{$set:{list:listt}}, function (err, data) {
+    Todo.update({_id: ObjectID("59cbf02c99d07dbb6af80459")},{$set:{list:listt}}, function (err, data) {
         if (err) {
             console.log(err);
             res.json({"message" : err})
@@ -109,7 +121,7 @@ router.post('/UpdateTodolist', function (req,res,next) {
             
         }
     });
-    Todo.find({_id: ObjectID("59c9c1f43f987a9e8761f2f1")}, function (err, data) {
+    Todo.find({_id: ObjectID("59cbf02c99d07dbb6af80459")}, function (err, data) {
         console.log(data[0]);
     })
 });

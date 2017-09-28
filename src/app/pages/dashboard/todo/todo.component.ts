@@ -10,12 +10,10 @@ import { WebApiPromiseService } from '../../../services/web-api-promise-service'
   styleUrls: ['./todo.scss'],
 })
 export class Todo implements OnInit{
-  received= [];
   dashboardColors = this._baConfig.get().colors.dashboard;
   result: string[];
   todoList = [];
   newTodoText: string = '';
-  todoList1= [];
 
 
   constructor(
@@ -37,10 +35,9 @@ export class Todo implements OnInit{
     this.moviPromiseService.getService('/api/getTodolist')
       .then(result => {
         this.todoList = result;
-        console.log('WTF: ', result);
       })
       .catch(error => console.log(error));
-    console.log('WTF why not in here?', this.todoList);
+      
     this.todoList.forEach((item) => {
         item.color = this._getRandomColor();
     });
