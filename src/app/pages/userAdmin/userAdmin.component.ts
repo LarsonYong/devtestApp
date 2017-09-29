@@ -43,6 +43,7 @@ export class UserAdminComponent {
         // document.getElementById('searchuser').classList.remove('active');
         // document.getElementById('searchuser').classList.add('hidden');
         this.userService.getUserList().subscribe((data) => (this.UserList = data.json()));
+        console.log(this.UserList);
         this.submitted = false;
         this.showsuccess = false;
         this.showalert = false;

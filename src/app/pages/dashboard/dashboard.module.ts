@@ -33,4 +33,9 @@ import { TodoService } from './todo/todo.service';
     TodoService,
   ]
 })
-export class DashboardModule {}
+export class DashboardModule {
+  color:string = 'aliceblue';
+  changeStyle($event) {
+    this.color = $event.type == 'mouseover' ? '':'aliceblue'
+  }
+}
