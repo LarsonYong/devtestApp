@@ -30,6 +30,7 @@ export class BuildListComponent {
     { 'TestType': '' },
     { 'TestUnits': '' },
   ];
+  testResult = [];
   buildEdit = [
     { 'BuildVersion': '' },
     { 'Bug': '' },
@@ -69,10 +70,14 @@ export class BuildListComponent {
     this.detailClicked = true;
     this.editClicked = false;
     this.buildDetail = [];
+    this.testResult = [];
     this.http.get('api/getBuild/' + buildversion)
       .map(res => {
         this.buildDetail = res.json()[0];
         console.log(this.buildDetail);
+        
+        this.testResult = res.json()[0].TestResult.replace(/(?:\r\n|\r|\n)/g, '<br /><br />')
+        
       }).subscribe();
   }
   editbuildinfo(buildversion) {

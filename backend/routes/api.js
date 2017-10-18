@@ -407,6 +407,68 @@ router.post('/v5login60',function (req,res,next) {
     );
 });
 
+router.post('/v5login70',function (req,res,next) {
+    var username = req.body.username;
+    var password = req.body.password;
+    request.post(
+        'http://10.70.32.70:4480/api/login', {
+            form:{
+                username:username,
+                password:password
+            }
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode === 200) {
+                var setcookie = response.headers["set-cookie"];
+                var body1= body;
+
+                if ( setcookie ) {
+                    setcookie.forEach(
+                        function ( cookiestr ) {
+                            console.log( "COOKIE: " + cookiestr );
+                        }
+                    );
+                }
+                res.json({"body":body1,"cookie":setcookie})
+            }else{
+                console.log('err')
+            }
+        }
+    );
+});
+
+
+router.post('/v5login30',function (req,res,next) {
+    var username = req.body.username;
+    var password = req.body.password;
+    request.post(
+        'http://10.70.32.30:4480/api/login', {
+            form:{
+                username:username,
+                password:password
+            }
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode === 200) {
+                var setcookie = response.headers["set-cookie"];
+                var body1= body;
+
+                if ( setcookie ) {
+                    setcookie.forEach(
+                        function ( cookiestr ) {
+                            console.log( "COOKIE: " + cookiestr );
+                        }
+                    );
+                }
+                res.json({"body":body1,"cookie":setcookie})
+            }else{
+                console.log('err')
+            }
+        }
+    );
+});
+
+
 router.post('/v5login50',function (req,res,next) {
     var username = req.body.username;
     var password = req.body.password;
@@ -503,6 +565,44 @@ router.post('/v5allconnect50',function (req,res,next) {
     })
 });
 
+
+
+router.post('/v5allconnect70',function (req,res,next) {
+    var cookie = req.body.cookie;
+    var options = {
+        url: 'http://10.70.32.70:4480/api/units/getAllConnectedUnits',
+        method:'GET',
+        headers: {
+            'Cookie': cookie
+        }
+    };
+    console.log(cookie);
+    request(options,function (err,response,body) {
+        console.log("body **************");
+        console.log(body);
+        res.send(body);
+    })
+});
+
+
+router.post('/v5allconnect30',function (req,res,next) {
+    var cookie = req.body.cookie;
+    var options = {
+        url: 'http://10.70.32.30:4480/api/units/getAllConnectedUnits',
+        method:'GET',
+        headers: {
+            'Cookie': cookie
+        }
+    };
+    console.log(cookie);
+    request(options,function (err,response,body) {
+        console.log("body **************");
+        console.log(body);
+        res.send(body);
+    })
+});
+
+
 router.post('/v5allconnect40',function (req,res,next) {
     var cookie = req.body.cookie;
     var options = {
@@ -544,6 +644,42 @@ router.post('/v5/50/units/info/:unitId',function (req,res,next) {
     var cookie =req.body.cookie;
     var options = {
         url: 'http://10.70.32.50:4480/api/units/info/' + unitId,
+        method: 'GET',
+        headers:{
+            'Cookie':cookie
+        }
+    };
+    console.log(options.url);
+    request(options,function (err,response,body) {
+        console.log(body);
+        res.send(body);
+    })
+});
+
+
+router.post('/v5/30/units/info/:unitId',function (req,res,next) {
+    const unitId = req.params.unitId;
+    var cookie =req.body.cookie;
+    var options = {
+        url: 'http://10.70.32.30:4480/api/units/info/' + unitId,
+        method: 'GET',
+        headers:{
+            'Cookie':cookie
+        }
+    };
+    console.log(options.url);
+    request(options,function (err,response,body) {
+        console.log(body);
+        res.send(body);
+    })
+});
+
+
+router.post('/v5/70/units/info/:unitId',function (req,res,next) {
+    const unitId = req.params.unitId;
+    var cookie =req.body.cookie;
+    var options = {
+        url: 'http://10.70.32.70:4480/api/units/info/' + unitId,
         method: 'GET',
         headers:{
             'Cookie':cookie

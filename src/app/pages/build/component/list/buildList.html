@@ -1,9 +1,9 @@
 <div class="row">
-<div class="col-md-4">
+<div class="col-md-5">
 <div class = "card" style="width: 100%">
     <div class="row">
         <div class="card-header clearfix" style="width:100%;  margin: 0 5% 0 5%">
-            <div style="width:100%" style="position:relative; float:right;">
+            <div style="position:relative; float:right;">
             <input  class="form-control form-control-sm"  placeholder="Search" [(ngModel)]="filterString">
             </div>
         </div>
@@ -21,9 +21,9 @@
                     <tr *ngFor="let buildData of ( buildNamelist |filter: filterString) ; let i = index;" >
                         <td>{{buildData}} </td>
                         <td>
-                        <button class="btn btn-primary bt-xs btn-raised" style="margin-left: 20%" (click)=getbuildinfo(buildData)>Detail</button>
+                        <button class="btn btn-primary bt-xs " style="margin-left: 20%" (click)=getbuildinfo(buildData)>Detail</button>
                        
-                        <button class="btn btn-warning bt-xs btn-raised" style="margin-left: 3%" (click)=editbuildinfo(buildData)>Edit </button>
+                        <button class="btn btn-warning bt-xs " style="margin-left: 3%" (click)=editbuildinfo(buildData)>Edit </button>
                         </td>
                     </tr>
                 </table>  
@@ -31,11 +31,26 @@
         </div>
     </div>
 </div>
+
 </div>
 <div class="col-md-6">
+    <div class="card" style="width:100%" [hidden]="!detailClicked">
+    <div class="row">
+        <div class="card-header clearfix " style="width:100%;  margin: 0 5% 0 5% ">
+            Test Result
+        </div>
+        <div class="card-body" style="width:100%;">
+            <div class="section-block">
+                <!-- <p style="width: 80%; margin: 0 5% 0 5% ">{{testResult}} </p> -->
+                <!-- <p style="width: 80%; margin: 0 5% 0 5% ">{{buildDetail.TestResult}} </p> -->
+                <div   style="width: 80%; margin: 2% 5% 0 8%;color:#8bd22f;font-weight: bold; " [innerHTML]="testResult"></div>
+            </div>
+        </div>
+    </div>
+</div>
     <div class = "card" style="width: 100%" [hidden]="!detailClicked">
         <div class="row">
-            <div class="card-header clearfix" style = "width:94%; margin: 0 5% 0 5%">Detail area
+            <div class="card-header clearfix" style = "width:94%; margin: 0 5% 0 5%">Detail Area
             </div>
             <div class="card-body" style="width:100%;" >
                 <table class="table table-bordered" style = "width:90%;margin: 0 0 3% 5%">
@@ -80,12 +95,6 @@
                             <td>Bug </td>
                             <td>{{buildDetail.Bug}}</td>
                         </tr>
-                        <tr>
-                            <!-- <td>9</td> -->
-                            <td>TestResult </td>
-                            <td>{{buildDetail.TestResult}}</td>
-                        </tr>
-                        
                     </tbody>
                 </table>    
             </div>
@@ -138,8 +147,8 @@
                     </div>
                     <div class="form-group"  >
                         <label> TestResult</label>
-                        <input class="form-control" name="testresult" #testresult defaultValue="{{buildEdit.TestResult}}">
-                        <!-- <span class="help-block sub-little-text">Some help info here</span> -->
+                        <textarea class="form-control" name="testresult" #testresult defaultValue="{{buildEdit.TestResult}}"></textarea>
+                        <span class="help-block sub-little-text">Some help info here</span> 
                         <button class="btn btn-primary " style="float:right; margin:3% 3% 2% 0" (click)=savebuildinfo(buildEdit._id,buildEdit.BuildVersion,buildtype.value,description.value,testtype.value,testdate.value,testunits.value,testdetails.value,bug.value,testresult.value) >Save information</button>
                     </div>
                     <!-- <div class="form-group"  >
